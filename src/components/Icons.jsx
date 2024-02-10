@@ -58,7 +58,7 @@ const LibraryIcon = ({ size }) => {
     >
       <path
         d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z"
-        fill="currentColor"
+        fill="#fff"
       />
     </svg>
   );
@@ -67,29 +67,50 @@ const LibraryIcon = ({ size }) => {
 const PlusIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 16 16"
+      data-encore-id="icon"
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
     >
-      <path d="M14 7H9V2H7v5H2v2h5v5h2V9h5z" fill="currentColor" />
-      <path fill="none" d="M0 0h16v16H0z" />
+      <path
+        fill="#fff"
+        d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"
+      ></path>
     </svg>
   );
 };
 
 const HeartIcon = ({ size }) => {
   return (
+    <>
+      <img
+        aria-hidden="true"
+        loading="eager"
+        width={48}
+        height={48}
+        alt="Liked Songs"
+        class="mMx2LUixlnN_Fu45JpFB iJp40IxKg6emF6KYJ414 Yn2Ei5QZn19gria6LjZj"
+        srcset="https://misc.scdn.co/liked-songs/liked-songs-64.png 32w, https://misc.scdn.co/liked-songs/liked-songs-64.png 64w, https://misc.scdn.co/liked-songs/liked-songs-300.png 150w, https://misc.scdn.co/liked-songs/liked-songs-300.png 300w, https://misc.scdn.co/liked-songs/liked-songs-640.png 320w, https://misc.scdn.co/liked-songs/liked-songs-640.png 640w"
+      ></img>
+    </>
+  );
+};
+
+const MusicIcon = ({ size }) => {
+  return (
     <svg
-      viewBox="0 0 16 16"
+      data-encore-id="icon"
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
+      data-testid="playlist"
+      viewBox="0 0 24 24"
     >
       <path
-        fill="currentColor"
-        d="M13.764 2.727a4.057 4.057 0 00-5.488-.253.558.558 0 01-.31.112.531.531 0 01-.311-.112 4.054 4.054 0 00-5.487.253A4.05 4.05 0 00.974 5.61c0 1.089.424 2.113 1.168 2.855l4.462 5.223a1.791 1.791 0 002.726 0l4.435-5.195A4.052 4.052 0 0014.96 5.61a4.057 4.057 0 00-1.196-2.883zm-.722 5.098L8.58 13.048c-.307.36-.921.36-1.228 0L2.864 7.797a3.072 3.072 0 01-.905-2.187c0-.826.321-1.603.905-2.187a3.091 3.091 0 012.191-.913 3.05 3.05 0 011.957.709c.041.036.408.351.954.351.531 0 .906-.31.94-.34a3.075 3.075 0 014.161.192 3.1 3.1 0 01-.025 4.403z"
-      />
+        fill="#fff"
+        d="M6 3h15v15.167a3.5 3.5 0 1 1-3.5-3.5H19V5H8v13.167a3.5 3.5 0 1 1-3.5-3.5H6V3zm0 13.667H4.5a1.5 1.5 0 1 0 1.5 1.5v-1.5zm13 0h-1.5a1.5 1.5 0 1 0 1.5 1.5v-1.5z"
+      ></path>
     </svg>
   );
 };
@@ -453,6 +474,7 @@ const Icon = ({ name, size = 24 }) => {
     library: LibraryIcon,
     plus: PlusIcon,
     heart: HeartIcon,
+    music: MusicIcon,
     heartFilled: HeartFilledIcon,
     download: DownloadIcon,
     prev: PrevIcon,

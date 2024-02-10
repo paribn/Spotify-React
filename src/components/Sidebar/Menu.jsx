@@ -1,42 +1,44 @@
 import React from "react";
 import { Icon } from "../Icons";
+import { NavLink } from "react-router-dom";
 
 export default function Menu() {
   return (
     <nav className="px-2">
       <ul className="flex flex-col">
         <li>
-          <a
-            href=""
+          <NavLink
+            activeClassName="text-white font-bold"
+            exact
+            to={"/"}
             className="h-10  flex gap-x-4 items-center text-sm font-semibold text-link hover:text-white px-4"
           >
             <span>
               <Icon name="home" />
             </span>
             Home
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a
-            href=""
+          <NavLink
+            to={"/search"}
             className="h-10  flex gap-x-4 items-center text-sm font-semibold text-link hover:text-white px-4"
+            exact
+            activeClassName="text-white font-bold"
           >
             <span>
               <Icon name="search" />
             </span>
             Search
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a
-            href=""
-            className="h-10  flex gap-x-4 items-center text-sm font-semibold text-link hover:text-white px-4"
-          >
-            <span>
-              <Icon name="library" />
-            </span>
-            Your Library
-          </a>
+          {/* <NavLink className=" hover:bg-blue-400 h-10">
+            <abbr title="Create playlist">
+              <Icon name="plus" />
+            </abbr>
+            <span></span>
+          </NavLink> */}
         </li>
       </ul>
     </nav>

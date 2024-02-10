@@ -9,6 +9,8 @@ module.exports = {
         active: "#181818",
         textColor: "#a7a7a7",
         footer: "#000000",
+        hoverColor: "#181818",
+        playListBg: "#282828",
       },
     },
   },
