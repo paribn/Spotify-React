@@ -51,15 +51,16 @@ const SearchIcon = ({ size }) => {
 const LibraryIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 512 512"
+      data-encore-id="icon"
+      viewBox="0 0 24 24"
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z"
         fill="#fff"
-      />
+        d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
+      ></path>
     </svg>
   );
 };
@@ -148,44 +149,19 @@ const DownloadIcon = ({ size }) => {
   );
 };
 
-const DownDirIcon = ({ size }) => {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      width={size}
-      height={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path fill="currentColor" d="M3 6l5 5.794L13 6z" />
-    </svg>
-  );
-};
-
-const ExternalIcon = ({ size }) => {
-  return (
-    <svg
-      viewBox="0 0 16 16"
-      width={size}
-      height={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill="currentColor"
-        d="M15 7V1H9v1h4.29L7.11 8.18l.71.71L14 2.71V7h1zM1 15h12V9h-1v5H2V4h5V3H1v12z"
-      />
-    </svg>
-  );
-};
-
 const PrevIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
+      data-encore-id="icon"
+      width={16}
+      height={16}
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
     >
-      <polyline stroke="currentColor" points="16 4 7 12 16 20" fill="none" />
+      <path
+        fill="#fff"
+        d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z"
+      ></path>
     </svg>
   );
 };
@@ -193,12 +169,16 @@ const PrevIcon = ({ size }) => {
 const NextIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
+      data-encore-id="icon"
+      width={16}
+      height={16}
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
     >
-      <polyline stroke="currentColor" points="8 4 17 12 8 20" fill="none" />
+      <path
+        fill="#fff"
+        d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z"
+      ></path>
     </svg>
   );
 };
@@ -206,12 +186,13 @@ const NextIcon = ({ size }) => {
 const PlayIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
+      data-encore-id="icon"
+      width={22}
+      height={22}
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
     >
-      <polygon points="21.57 12 5.98 3 5.98 21 21.57 12" fill="currentColor" />
+      <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
     </svg>
   );
 };
@@ -479,8 +460,6 @@ const Icon = ({ name, size = 24 }) => {
     download: DownloadIcon,
     prev: PrevIcon,
     next: NextIcon,
-    downDir: DownDirIcon,
-    external: ExternalIcon,
     play: PlayIcon,
     pause: PauseIcon,
     playerPrev: PlayerPrevIcon,

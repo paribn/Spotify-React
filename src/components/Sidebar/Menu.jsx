@@ -32,14 +32,7 @@ export default function Menu() {
             Search
           </NavLink>
         </li>
-        <li>
-          {/* <NavLink className=" hover:bg-blue-400 h-10">
-            <abbr title="Create playlist">
-              <Icon name="plus" />
-            </abbr>
-            <span></span>
-          </NavLink> */}
-        </li>
+        <li></li>
       </ul>
     </nav>
   );

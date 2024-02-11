@@ -8,9 +8,9 @@ import Playlist from "../Sidebar/Playlist";
 export default function Sidebar() {
   return (
     <>
-      <aside className="w-72 pt-2 flex flex-col gap-x-1 ">
+      <aside className="w-72 pt-2 flex flex-shrink-0 flex-col gap-x-1 ">
         <div className="w-50 bg-mainBg py-6 rounded-xl ml-2 mr-2">
-          <a href="">
+          <a href="#">
             <img src={logo} alt="spotify" className="h-6 mb-4 ml-6" />
           </a>
           <Menu />

@@ -8,13 +8,15 @@ import Library from "./pages/Library";
 export default function Main() {
   return (
     <>
-      <main className="flex-auto">
+      <main className="flex-auto  bg-mainBg py-6 rounded-xl mt-2 mr-2  overflow-auto ">
         <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route path="/search" element={<Search />}></Route>
-          <Route path="/library" element={<Library />}></Route>
-        </Routes>
+        <div className="px-8">
+          <Routes>
+            <Route exact path="/" element={<Home />}></Route>
+            <Route path="/search" element={<Search />}></Route>
+            <Route path="/library" element={<Library />}></Route>
+          </Routes>
+        </div>
       </main>
     </>
   );
