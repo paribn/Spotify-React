@@ -15,6 +15,7 @@ module.exports = {
         hoverColor: "#181818",
         playListBg: "#282828",
         dropDown: "#282828",
+        FooterPlay: "#4d4d4d",
       },
     },
   },
