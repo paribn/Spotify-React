@@ -4,8 +4,11 @@ import Menu from "../Sidebar/Menu";
 import { Icon } from "../Icons";
 import { NavLink } from "react-router-dom";
 import Playlist from "../Sidebar/Playlist";
+import { useSelector } from "react-redux";
+import SidebarCover from "../Sidebar/SidebarCover";
 
 export default function Sidebar() {
+  const sidebar = useSelector((state) => state.player.sidebar);
   return (
     <>
       <aside className="w-72 pt-2 flex flex-shrink-0 flex-col gap-x-1 ">
@@ -56,6 +59,7 @@ export default function Sidebar() {
           </nav>
           <Playlist />
         </div>
+        {sidebar && <SidebarCover />}
       </aside>
     </>
   );

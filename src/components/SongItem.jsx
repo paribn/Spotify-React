@@ -6,7 +6,7 @@ import { setCurrent } from "../stores/player";
 
 export default function SongItem({ item }) {
   const dispacth = useDispatch();
-  const { current } = useSelector((state) => state.player);
+  const { current, playing, controls } = useSelector((state) => state.player);
 
   const imageStyle = (item) => {
     switch (item.type) {
@@ -19,8 +19,16 @@ export default function SongItem({ item }) {
 
   const updateCurrent = () => {
     dispacth(setCurrent(item));
+    if (current.id == item.id) {
+      if (playing) {
+        controls.pouse();
+      } else {
+        controls.play();
+      }
+    }
   };
 
+  const isCurrentItem = current?.id == item.id && playing;
   return (
     <NavLink
       className=" bg-hoverColor p-4 rounded hover:bg-dropDown group"
@@ -34,9 +42,11 @@ export default function SongItem({ item }) {
         />
         <button
           onClick={updateCurrent}
-          className="w-12 h-12 rounded-full bg-greenPlay absolute bottom-1 right-1 group-hover:flex group-focus:flex ease-out duration-300 items-center justify-center hidden"
+          className={`w-12 h-12 rounded-full bg-greenPlay absolute bottom-1 right-1 group-hover:flex group-focus:flex ease-out duration-300 items-center justify-center ${
+            !isCurrentItem ? "hidden" : "flex"
+          }`}
         >
-          <Icon name={current?.id == item.id ? "pause" : "play"} />
+          <Icon name={isCurrentItem ? "pause" : "play"} />
         </button>
       </div>
 

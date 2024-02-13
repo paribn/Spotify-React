@@ -120,28 +120,15 @@ const HeartFilledIcon = ({ size }) => {
   return (
     <svg
       data-encore-id="icon"
-      width={size}
-      height={size}
+      width={16}
+      height={16}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
     >
-      <path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path>
-    </svg>
-  );
-};
-
-const DownloadIcon = ({ size }) => {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      xmlns="http://www.w3.org/2000/svg"
-    >
       <path
-        fill="currentColor"
-        d="M11.5 0C5.149 0 0 5.148 0 11.5 0 17.851 5.149 23 11.5 23S23 17.851 23 11.5C23 5.148 17.851 0 11.5 0zm0 22C5.71 22 1 17.29 1 11.5S5.71 1 11.5 1 22 5.71 22 11.5 17.29 22 11.5 22zm.499-6.842V5h-1v10.149l-3.418-3.975-.758.652 4.678 5.44 4.694-5.439-.757-.653-3.439 3.984z"
-      />
+        fill="#b3b3b3"
+        d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"
+      ></path>
     </svg>
   );
 };
@@ -198,13 +185,13 @@ const ArrowLeftIcon = ({ size }) => {
   return (
     <svg
       viewBox="0 0 24 24"
-      width={size}
-      height={size}
+      width={16}
+      height={16}
       xmlns="http://www.w3.org/2000/svg"
     >
       <polygon
         points="15.54,21.151 5.095,12.229 15.54,3.309 16.19,4.069 6.635,12.229 16.19,20.39 "
-        fill="#b3b3b3"
+        fill="#fff"
       />
     </svg>
   );
@@ -363,18 +350,20 @@ const FullScreenOffIcon = ({ size }) => {
 const PictureInPictureIcon = ({ size }) => {
   return (
     <svg
-      viewBox="0 0 16 16"
+      data-encore-id="icon"
       width={16}
       height={16}
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
     >
-      <g fill="currentColor" fillRule="evenodd">
-        <path
-          d="M1 3v9h14V3H1zm0-1h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"
-          fillRule="nonzero"
-        />
-        <path d="M10 8h4v3h-4z" />
-      </g>
+      <path
+        fill="#b3b3b3"
+        d="M16 2.45c0-.8-.65-1.45-1.45-1.45H1.45C.65 1 0 1.65 0 2.45v11.1C0 14.35.65 15 1.45 15h5.557v-1.5H1.5v-11h13V7H16V2.45z"
+      ></path>
+      <path
+        fill="#b3b3b3"
+        d="M15.25 9.007a.75.75 0 0 1 .75.75v4.493a.75.75 0 0 1-.75.75H9.325a.75.75 0 0 1-.75-.75V9.757a.75.75 0 0 1 .75-.75h5.925z"
+      ></path>
     </svg>
   );
 };
@@ -485,7 +474,6 @@ const Icon = ({ name, size = 24 }) => {
     heart: HeartIcon,
     music: MusicIcon,
     heartFilled: HeartFilledIcon,
-    download: DownloadIcon,
     prev: PrevIcon,
     next: NextIcon,
     play: PlayIcon,

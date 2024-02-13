@@ -4,19 +4,28 @@ import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setControls } from "../../stores/player";
+import { setControls, setPlaying, setSidebar } from "../../stores/player";
 
 export default function Player() {
   const dispatch = useDispatch();
-  const { current } = useSelector((state) => state.player);
+  const { current, sidebar } = useSelector((state) => state.player);
 
   const [audio, state, controls, ref] = useAudio({
     src: current?.src,
+    autoPlay: false,
   });
 
   useEffect(() => {
     controls.play();
   }, [current]);
+
+  useEffect(() => {
+    dispatch(setPlaying(state.playing));
+  }, [state.playing]);
+
+  useEffect(() => {
+    dispatch(setControls(controls));
+  }, []);
 
   const volumeIcon = useMemo(() => {
     if (state.volume == 0 || state.muted) return "volumeMuted";
@@ -24,15 +33,41 @@ export default function Player() {
     if (state.volume > 0.33 && state.volume < 0.66) return "volumeNormal";
     return "volumeFull";
   }, [state.volume, state.muted]);
+
   return (
     <>
       <div className="flex justify-between px-4 items-center h-full">
-        <div className="min-w-[11.25rem] w-[30%] flex items-center">
+        <div className="min-w-[11.25rem] w-[30%] ">
           {current && (
             <div className="flex items-center">
-              <div className="w-14 h-14">
-                <img src={current?.img} alt="imgg" />
+              <div className="flex items-center  ">
+                {!sidebar && (
+                  <div className="w-14 h-14 relative group mr-4 flex-shrink-0">
+                    <img
+                      className=" w-full h-full"
+                      src={current?.img}
+                      alt="imgg"
+                    />
+                    <button
+                      onClick={() => dispatch(setSidebar(true))}
+                      className="w-6 h-6 bg-footer opacity-0 group-hover:opacity-80 hover:!opacity-100 hover:scale-[1.06] flex items-center rotate-90 rounded-full absolute top-1 right-1.5 justify-center"
+                    >
+                      <Icon name="arrowLeft" />
+                    </button>
+                  </div>
+                )}
+                <div>
+                  <h6 className="text-white font-semibold line-clamp-1">
+                    {current?.title}
+                  </h6>
+                  <span className="text-opacity-70 text-[0.688rem]">
+                    {current?.artistName}
+                  </span>
+                </div>
               </div>
+              <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
+                <Icon name="heartFilled" />
+              </button>
             </div>
           )}
         </div>
@@ -105,6 +140,9 @@ export default function Player() {
 
           <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
             <Icon name="fullScreen" />
+          </button>
+          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
+            <Icon name="pictureInPicture" />
           </button>
         </div>
       </div>
