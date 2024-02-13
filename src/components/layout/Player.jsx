@@ -2,12 +2,21 @@ import { Icon } from "../Icons";
 import { useAudio } from "react-use";
 import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setControls } from "../../stores/player";
 
 export default function Player() {
+  const dispatch = useDispatch();
+  const { current } = useSelector((state) => state.player);
+
   const [audio, state, controls, ref] = useAudio({
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    src: current?.src,
   });
+
+  useEffect(() => {
+    controls.play();
+  }, [current]);
 
   const volumeIcon = useMemo(() => {
     if (state.volume == 0 || state.muted) return "volumeMuted";
@@ -18,7 +27,15 @@ export default function Player() {
   return (
     <>
       <div className="flex justify-between px-4 items-center h-full">
-        <div className="min-w-[11.25rem] w-[30%]"></div>
+        <div className="min-w-[11.25rem] w-[30%] flex items-center">
+          {current && (
+            <div className="flex items-center">
+              <div className="w-14 h-14">
+                <img src={current?.img} alt="imgg" />
+              </div>
+            </div>
+          )}
+        </div>
         <div className=" max-w-[45.125rem] w-[40%] flex flex-col px-4 items-center">
           <div className="flex items-center gap-x-2 ">
             <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 ">
