@@ -51,9 +51,9 @@ export default function SongItem({ item }) {
       </div>
 
       <h6 className=" overflow-hidden  overflow-ellipsis whitespace-nowrap font-semibold text-white ">
-        {item.title}
+        {item.artistname}
       </h6>
-      <p className=" line-clamp-2 text-sm ">{item.desc}</p>
+      <p className=" line-clamp-2 text-sm ">{item.artistType}</p>
     </NavLink>
   );
 }

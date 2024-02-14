@@ -12,6 +12,7 @@ export default function Navigation() {
   const goForward = () => {
     navigate(1);
   };
+
   return (
     <>
       <nav className="flex items-center gap-4">
