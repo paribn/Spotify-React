@@ -56,9 +56,9 @@ export default function Home() {
   return (
     <>
       <div className="grid gap-y-6">
-        <CardItems title="Recently played" items={items} more="/blabla" />
-        <CardItems title="Try something else" items={items} more="/blabla" />
-        <CardItems title="More like" items={items} more="/blabla" />
+        <CardItems title="Recently played" more="/blabla" />
+        {/* <CardItems title="Try something else"  more="/blabla" /> */}
+        {/* <CardItems title="More like" items={items} more="/blabla" /> */}
       </div>
     </>
   );
