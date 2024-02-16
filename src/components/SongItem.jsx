@@ -10,6 +10,7 @@ export default function SongItem({
   photoUrl,
   artistname,
   artistType,
+  musicUrl,
 }) {
   const dispacth = useDispatch();
   const { current, playing, controls } = useSelector((state) => state.player);
@@ -18,13 +19,13 @@ export default function SongItem({
 
   const updateCurrent = () => {
     dispacth(setCurrent(item));
-    // if (current.id == item.id) {
-    //   if (playing) {
-    //     controls.pouse();
-    //   } else {
-    //     controls.play();
-    //   }
-    // }
+    if (current && current.id === id && controls) {
+      if (playing) {
+        controls.pouse();
+      } else {
+        controls.play();
+      }
+    }
   };
 
   const isCurrentItem = current?.id == id && playing;

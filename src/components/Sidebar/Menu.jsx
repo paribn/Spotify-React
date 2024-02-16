@@ -32,7 +32,6 @@ export default function Menu() {
             Search
           </NavLink>
         </li>
-        <li></li>
       </ul>
     </nav>
   );

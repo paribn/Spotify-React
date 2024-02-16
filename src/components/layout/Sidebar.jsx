@@ -2,12 +2,17 @@ import React from "react";
 import logo from "../../assets/img/logo.svg";
 import Menu from "../Sidebar/Menu";
 import { Icon } from "../Icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Playlist from "../Sidebar/Playlist";
 import { useSelector } from "react-redux";
 import SidebarCover from "../Sidebar/SidebarCover";
 
 export default function Sidebar() {
+  // const location = useLocation();
+  // const [closeMenu, setCloseMenu] = useState(true);
+  // const handleCloseMenu = () => {
+  //   setCloseMenu(!closeMenu);
+  // }; toggle siddebar vaxtn qalsa yaz
   const sidebar = useSelector((state) => state.player.sidebar);
   return (
     <>

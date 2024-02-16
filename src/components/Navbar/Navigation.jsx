@@ -15,7 +15,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="flex items-center gap-4">
+      <nav className="flex items-center gap-4 ">
         <button
           onClick={goBack}
           className="w-8 h-8  flex items-center justify-center rounded-full bg-footer"

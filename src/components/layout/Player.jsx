@@ -11,7 +11,7 @@ export default function Player() {
   const { current, sidebar } = useSelector((state) => state.player);
 
   const [audio, state, controls, ref] = useAudio({
-    src: current?.src,
+    music: current?.musicUrl,
     autoPlay: false,
   });
 
@@ -36,6 +36,7 @@ export default function Player() {
 
   return (
     <>
+      {/* footer music */}
       <div className="flex justify-between px-4 items-center h-full">
         <div className="min-w-[11.25rem] w-[30%] ">
           {current && (

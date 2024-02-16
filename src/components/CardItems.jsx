@@ -5,9 +5,8 @@ import Title from "./Title";
 
 export default function CardItems({ title, more = false }) {
   const [music, setMusic] = useState([]);
-
   useEffect(() => {
-    fetch("https://localhost:44365/api/Music")
+    fetch(`${process.env.REACT_APP_API}/Music`)
       .then((x) => x.json())
       .then((x) => setMusic(x));
   }, []);
@@ -26,6 +25,7 @@ export default function CardItems({ title, more = false }) {
                 artistname={x.artistname}
                 artistType={x.artistType}
                 photoUrl={x.photoUrl}
+                musicUrl={console.log(x.musicUrl)}
               />
             );
           })}

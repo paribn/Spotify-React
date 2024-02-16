@@ -11,7 +11,7 @@ export default function Auth() {
     name: "Pari Novruzova",
   };
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left ">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md hover:bg-footer px-3 py-2 text-sm font-semibold text-white shadow-sm ">
           {user.name}
