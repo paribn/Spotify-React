@@ -22,7 +22,6 @@ function App() {
               <Route path="/search" element={<Search />}></Route>
               <Route path="/library" element={<Library />}></Route>
               <Route path="/register" element={<Register />}></Route>
-
               <Route path="/*" element={<NotFound />}></Route>
             </Routes>
           </div>

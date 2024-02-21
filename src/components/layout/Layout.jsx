@@ -12,7 +12,7 @@ export default function Layout() {
         <Sidebar />
         <Navbar />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

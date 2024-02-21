@@ -4,21 +4,18 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "../stores/player";
 
-export default function SongItem({
-  item,
-  id,
-  photoUrl,
-  artistname,
-  artistType,
-  musicUrl,
-}) {
+export default function SongItem({ item, id, photoPath, name, artistType }) {
   const dispacth = useDispatch();
   const { current, playing, controls } = useSelector((state) => state.player);
 
-  const cardStyle = artistType.includes("Band") ? "rounded-lg" : "rounded-full";
+  const cardStyle =
+    artistType && typeof artistType === "string" && artistType.includes("Band")
+      ? "rounded-lg"
+      : "rounded-full";
 
   const updateCurrent = () => {
-    dispacth(setCurrent(item));
+    // dispacth(setCurrent(musicUrl));
+    // controls.play().then((x) => console.);
     if (current && current.id === id && controls) {
       if (playing) {
         controls.pouse();
@@ -33,11 +30,11 @@ export default function SongItem({
     <NavLink
       className=" bg-hoverColor p-4 rounded hover:bg-dropDown group"
       key={id}
-      to="/"
+      to={`/cardDetails/${id}`}
     >
       <div className="pt-[100%] relative mb-4">
         <img
-          src={`https://localhost:44365/musicAlbomimg/${photoUrl}`}
+          src={`https://localhost:44365/Images/${photoPath}`}
           className={`absolute inset-0 w-full h-full ${cardStyle} `}
         />
         <button
@@ -51,7 +48,7 @@ export default function SongItem({
       </div>
 
       <h6 className=" overflow-hidden  overflow-ellipsis whitespace-nowrap font-semibold text-white ">
-        {artistname}
+        {name}
       </h6>
       <p className=" line-clamp-2 text-sm ">{artistType}</p>
     </NavLink>

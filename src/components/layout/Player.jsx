@@ -2,16 +2,25 @@ import { Icon } from "../Icons";
 import { useAudio } from "react-use";
 import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setControls, setPlaying, setSidebar } from "../../stores/player";
 
 export default function Player() {
+  const [music, setMusic] = useState([]);
+  useEffect((id) => {
+    fetch(`${process.env.REACT_APP_API}/Music/${id}`)
+      .then((x) => x.json())
+      .then((x) => setMusic(x));
+  }, []);
+
   const dispatch = useDispatch();
   const { current, sidebar } = useSelector((state) => state.player);
 
+  console.log(current);
+
   const [audio, state, controls, ref] = useAudio({
-    music: current?.musicUrl,
+    src: current?.src,
     autoPlay: false,
   });
 
@@ -45,10 +54,10 @@ export default function Player() {
                 {!sidebar && (
                   <div className="w-14 h-14 relative group mr-4 flex-shrink-0">
                     <img
-                      className=" w-full h-full"
-                      src={current?.img}
-                      alt="imgg"
+                      src={`https://localhost:44365/musicAlbomimg/${music.photoUrl}`}
+                      className="w-full h-full"
                     />
+
                     <button
                       onClick={() => dispatch(setSidebar(true))}
                       className="w-6 h-6 bg-footer opacity-0 group-hover:opacity-80 hover:!opacity-100 hover:scale-[1.06] flex items-center rotate-90 rounded-full absolute top-1 right-1.5 justify-center"
@@ -59,10 +68,10 @@ export default function Player() {
                 )}
                 <div>
                   <h6 className="text-white font-semibold line-clamp-1">
-                    {current?.title}
+                    {music.title}
                   </h6>
                   <span className="text-opacity-70 text-[0.688rem]">
-                    {current?.artistName}
+                    {music.artistName}
                   </span>
                 </div>
               </div>
