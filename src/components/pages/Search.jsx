@@ -4,15 +4,17 @@ import Category from "./Category";
 
 export default function Search({ title, more = false }) {
   const [genre, setGenre] = useState([]);
-  const [visible, setVisible] = useState(3);
-
-  const showMoreItems = () => {
-    setVisible((prevValue) => prevValue + 5);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(5);
+  const params = {
+    page,
+    perPage,
   };
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API}/Genre`)
       .then((x) => x.json())
-      .then((data) => setGenre(data));
+      .then((x) => setGenre(x));
   }, []);
 
   console.log(genre);
@@ -22,9 +24,9 @@ export default function Search({ title, more = false }) {
     "#006450",
     "#8400e7",
     "#0d73ec",
+    "#148a08",
     "#e41d63",
     "#777777",
-    "#148a08",
     "#d84000",
     "#8d67ab",
     "#e1118c",
@@ -33,7 +35,7 @@ export default function Search({ title, more = false }) {
     <section>
       <Title title="Browse all" />
       <div className="grid grid-cols-5 gap-6">
-        {genre.slice(0, visible).map((x, index) => {
+        {genre.map((x, index) => {
           const color = colors[index % colors.length];
           return (
             <Category
@@ -45,7 +47,6 @@ export default function Search({ title, more = false }) {
             />
           );
         })}
-        <button onClick={showMoreItems}>Show more</button>
       </div>
     </section>
   );

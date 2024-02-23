@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import SongItem from "./SongItem";
 import Title from "./Title";
 
@@ -23,8 +22,8 @@ export default function CardItems({ title, more = false }) {
                 key={x.id}
                 id={x.id}
                 name={x.name}
-                artistType={x.artistType}
-                photoPath={x.photoPath}
+                artistType={x.artistType ? "Band" : "Artist"}
+                photoPath={x.artistPhotos[0].photoPath}
               />
             );
           })}

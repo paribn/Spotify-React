@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import Songs from "./Songs";
 
 export default function CardDetails() {
-  const [music, setMusic] = useState([]);
+  const [music, setMusic] = useState(null);
   const params = useParams();
+  const [searchParams] = useSearchParams();
+  const [isPlaylist, setIsPlaylist] = useState(
+    !!parseInt(searchParams.get("isPlaylist"))
+  );
+
   useEffect(() => {
     const getMusic = async () => {
+      const category = isPlaylist ? "Album" : "Artist";
       const result = await fetch(
-        `https://localhost:44365/api/Music/${params.id}`
+        `https://localhost:44365/api/${category}/${params.id}`
       );
       const data = await result.json();
-      setMusic([data]);
+      setMusic(data);
     };
-    getMusic();
+    if (params.id) {
+      getMusic();
+    }
   }, [params.id]);
-  {
-    /* <div>{music.title}</div>; */
-  }
+
+  console.log("music ", music);
+  if (!music) return;
 
   return (
     <>
@@ -25,33 +34,36 @@ export default function CardDetails() {
           <div>{music?.artistname}</div>
         </div>
       </header> */}
-      <section
-        className="flex items-end space-x-7 bg-gradient-to-b 
-      "
-      >
+      <section className="flex items-end space-x-7 bg-gradient-to-b">
         <img
           className="h-44 w-44 "
-          src={`https://localhost:44365/musicAlbomimg/${music?.photoUrl}`}
+          style={{ objectFit: "cover" }}
+          src={
+            isPlaylist
+              ? `https://localhost:44365/Images/${music?.coverImage}`
+              : `https://localhost:44365/Images/${
+                  music?.artistPhotos[music?.artistPhotos.length - 1].photoPath
+                }`
+          }
         />
         <div>
-          <p className="text-sm font-bold">Playlist</p>
-          <span className="text-3xl font-extrabold text-white">
-            {music?.albumName}
-          </span>
+          <p className="text-sm font-bold">
+            {isPlaylist ? "Playlist" : "Artist"}
+          </p>
+          <h1 className="text-3xl font-extrabold text-white">
+            {isPlaylist ? music?.title : music?.name}
+          </h1>
         </div>
       </section>
-
-      <div>
-        <table className="table-auto mt-10">
-          <tbody>
-            {music.map((x, index) => (
-              <tr key={x.id}>
-                <td className="p-8">{index + 1}</td>
-                <td>{x.title}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div style={{ height: "40px" }}></div>
+      <div className="text-white px-8 flex flex-col space-y-1 pb-28">
+        {music.musicGet.map((music, index) => (
+          <Songs
+            number={index + 1}
+            name={music.musicName}
+            imgSrc={`https://localhost:44365/Images/${music?.musicPhotoUrl}`}
+          />
+        ))}
       </div>
     </>
   );

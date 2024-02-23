@@ -13,6 +13,7 @@ export default function SongItem({ item, id, photoPath, name, artistType }) {
       ? "rounded-lg"
       : "rounded-full";
 
+  console.log(id);
   const updateCurrent = () => {
     // dispacth(setCurrent(musicUrl));
     // controls.play().then((x) => console.);
@@ -30,7 +31,7 @@ export default function SongItem({ item, id, photoPath, name, artistType }) {
     <NavLink
       className=" bg-hoverColor p-4 rounded hover:bg-dropDown group"
       key={id}
-      to={`/cardDetails/${id}`}
+      to={`/cardDetails/${id}?isPlaylist=0`}
     >
       <div className="pt-[100%] relative mb-4">
         <img

@@ -9,6 +9,7 @@ import Register from "./Account/Register";
 import SignIn from "./Account/SignIn";
 import CardDetails from "./pages/CardDetails";
 import PageFooter from "./layout/PageFooter";
+import ForgotPassword from "./Account/ForgotPassword";
 
 export default function Main() {
   return (
@@ -22,7 +23,8 @@ export default function Main() {
             <Route path="/library" element={<Library />}></Route>
             <Route path="/SignIn" element={<SignIn />}></Route>
             <Route path="/Register" element={<Register />}></Route>
-            <Route path="/cardDetails/id" element={<CardDetails />}></Route>
+            <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
+            <Route path="/cardDetails/:id" element={<CardDetails />}></Route>
             <Route path="/*" element={<NotFound />}></Route>
           </Routes>
         </div>

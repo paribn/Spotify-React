@@ -6,7 +6,7 @@ export default function SignIn() {
   return (
     <>
       <div className=" w-full h-full bg-footer p-10 rounded-xl mt-14">
-        <form className="max-w-sm mx-auto ">
+        <form className="max-w-xs mx-auto ">
           <div className="mb-5">
             <label
               for="email"
@@ -54,12 +54,14 @@ export default function SignIn() {
           </div>
           <button
             type="submit"
-            className="w-full h-10 rounded-xl bg-greenPlay text-black font-semibold"
+            className="w-full h-10 rounded-3xl bg-greenPlay text-black font-semibold"
           >
             Log
           </button>
           <div className="text-center mt-5 hover:text-greenPlay underline">
-            <NavLink className=" text-center">Forgot your password?</NavLink>
+            <NavLink to={"/ForgotPassword"} className=" text-center">
+              Forgot your password?
+            </NavLink>
           </div>
           <div className="mt-8 text-center">
             Don't have an account ?

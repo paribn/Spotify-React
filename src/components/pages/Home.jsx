@@ -15,8 +15,6 @@ export default function Home() {
     <>
       <div className="grid gap-y-6">
         <CardItems title="Recently played" more="/blabla" />
-        {/* <CardItems title="Try something else"  more="/blabla" /> */}
-        {/* <CardItems title="More like" items={items} more="/blabla" /> */}
       </div>
     </>
   );
