@@ -15,4 +15,23 @@
     height: calc(100vh - theme("spacing.24"));
     @apply flex;
   }
+  main::-webkit-scrollbar {
+    display: none;
+  }
+
+  .playlistSection::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

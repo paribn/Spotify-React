@@ -149,8 +149,8 @@ const HeartIcon = ({ size }) => {
         width={48}
         height={48}
         alt="Liked Songs"
-        class="mMx2LUixlnN_Fu45JpFB iJp40IxKg6emF6KYJ414 Yn2Ei5QZn19gria6LjZj"
-        srcset="https://misc.scdn.co/liked-songs/liked-songs-64.png 32w, https://misc.scdn.co/liked-songs/liked-songs-64.png 64w, https://misc.scdn.co/liked-songs/liked-songs-300.png 150w, https://misc.scdn.co/liked-songs/liked-songs-300.png 300w, https://misc.scdn.co/liked-songs/liked-songs-640.png 320w, https://misc.scdn.co/liked-songs/liked-songs-640.png 640w"
+        className="mMx2LUixlnN_Fu45JpFB iJp40IxKg6emF6KYJ414 Yn2Ei5QZn19gria6LjZj"
+        srcSet="https://misc.scdn.co/liked-songs/liked-songs-64.png 32w, https://misc.scdn.co/liked-songs/liked-songs-64.png 64w, https://misc.scdn.co/liked-songs/liked-songs-300.png 150w, https://misc.scdn.co/liked-songs/liked-songs-300.png 300w, https://misc.scdn.co/liked-songs/liked-songs-640.png 320w, https://misc.scdn.co/liked-songs/liked-songs-640.png 640w"
       ></img>
     </>
   );
@@ -235,6 +235,23 @@ const PlayIcon = ({ size }) => {
       viewBox="0 0 24 24"
     >
       <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path>
+    </svg>
+  );
+};
+
+const Playlist = ({ size }) => {
+  return (
+    <svg
+      data-encore-id="icon"
+      width={22}
+      height={22}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#fff"
+        d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"
+      ></path>
     </svg>
   );
 };
@@ -492,7 +509,7 @@ const VolumeFullIcon = ({ size }) => {
       height={16}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
-      class="Svg-sc-ytk21e-0 kcUFwU"
+      className="Svg-sc-ytk21e-0 kcUFwU"
     >
       <path
         fill="#b3b3b3"
@@ -552,6 +569,7 @@ const Icon = ({ name, size = 24 }) => {
     lyrics: LyricsIcon,
     arrowLeft: ArrowLeftIcon,
     logo: LogoIcon,
+    playlist: Playlist,
     instagram: Instagram,
     fb: Facebook,
     tw: Twitter,

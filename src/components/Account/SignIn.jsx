@@ -1,58 +1,150 @@
-import { Switch } from "@headlessui/react";
+import { useFormik } from "formik";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { loginSchema } from "../../validations/loginSchema";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { httpClient } from "../../utils/httpClient";
+import { loginAction } from "../../redux/slices/accoutSlice";
 
 export default function SignIn() {
+  const { token } = useSelector((state) => state.account);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      Password: "",
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+      try {
+        const response = await httpClient.post("/Account/Login", values, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        dispatch(
+          loginAction({
+            token: response.token,
+            email: response.email,
+          })
+        );
+
+        console.log(response, "response");
+      } catch (error) {
+        if (
+          error.response &&
+          error.response?.data &&
+          error.response?.data?.errors
+        ) {
+          formik.setErrors(error.response?.data?.errors);
+        } else {
+          console.error("Error submitting form:", error);
+        }
+      }
+    },
+    validationSchema: loginSchema,
+  });
+
+  const onSubmit = async (e, values) => {
+    e.preventDefault();
+    console.log(values);
+    try {
+      const response = await httpClient.post(
+        "/Account/Login",
+        { email: values.email, password: values.Password },
+        {
+          headers: {
+            Authorization: `Bearer`,
+            "Content-Type": "application/json-patch+json",
+          },
+        }
+      );
+
+      console.log(response);
+
+      localStorage.setItem(
+        "myData",
+        JSON.stringify({
+          token: response.data.token,
+          email: response.data.email,
+        })
+      );
+      dispatch(
+        loginAction({
+          token: response.data.token,
+          email: response.data.email,
+        })
+      );
+
+      console.log("success");
+      navigate("/");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
+
   return (
     <>
       <div className=" w-full h-full bg-footer p-10 rounded-xl mt-14">
-        <form className="max-w-xs mx-auto ">
+        <form
+          className="max-w-xs mx-auto "
+          onSubmit={(e) => onSubmit(e, formik.values)}
+        >
           <div className="mb-5">
             <label
-              for="email"
+              htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Email or username
             </label>
             <input
+              onChange={formik.handleChange}
               type="email"
+              name="email"
               id="email"
               className="bg-gray-50 border border-textColor text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
+              value={formik.values.email}
             />
+            {formik.errors.email && formik.touched.email && (
+              <span style={{ color: "#f15e6c" }}>{formik.errors.email}</span>
+            )}
           </div>
           <div className="mb-5">
             <label
-              for="password"
+              htmlFor="password"
               className="block mb-2 text-sm font-medium dark:text-white"
             >
               Password
             </label>
             <input
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               type="password"
               id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="Password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               required
+              value={formik.values.Password}
             />
+            {formik.errors.Password && formik.touched.Password && (
+              <span style={{ color: "#f15e6c" }}>{formik.errors.Password}</span>
+            )}
           </div>
-          <div className="flex items-start mb-5">
-            <div className="flex items-center h-5">
-              <input
-                id="remember"
-                type="checkbox"
-                value=""
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                required
-              />
-            </div>
-            <label
-              for="remember"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Remember me
+          {/* <div className="flex items-start mb-5">
+            <label className="inline-flex items-center mb-5 cursor-pointer">
+              <input type="checkbox" value="" className="sr-only peer" />
+              <div className="relative w-9 h-5  peer-focus:outline-none peer-focus: ring-2 bg-greenPlay peer-focus:ring-white dark:peer-focus:ring-white-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-white-600"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300  ">
+                Remember me
+              </span>
             </label>
-          </div>
+          </div> */}
           <button
+            onClick={(e) => onSubmit(e, formik.values)}
             type="submit"
             className="w-full h-10 rounded-3xl bg-greenPlay text-black font-semibold"
           >

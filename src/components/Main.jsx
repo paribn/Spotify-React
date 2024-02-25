@@ -18,10 +18,10 @@ export default function Main() {
         <Navbar />
         <div className="px-8">
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
+            <Route index path="/" element={<Home />}></Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path="/library" element={<Library />}></Route>
-            <Route path="/SignIn" element={<SignIn />}></Route>
+            <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/Register" element={<Register />}></Route>
             <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
             <Route path="/cardDetails/:id" element={<CardDetails />}></Route>

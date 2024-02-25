@@ -4,35 +4,24 @@ import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setControls, setPlaying, setSidebar } from "../../stores/player";
+import { setControls, setPlaying, setSidebar } from "../../redux/slices/player";
 
 export default function Player() {
-  const [music, setMusic] = useState([]);
-  useEffect((id) => {
-    fetch(`${process.env.REACT_APP_API}/Music/${id}`)
-      .then((x) => x.json())
-      .then((x) => setMusic(x));
-  }, []);
-
   const dispatch = useDispatch();
-  const { current, sidebar } = useSelector((state) => state.player);
+  const { playing, data } = useSelector((state) => state.player);
 
   const [audio, state, controls, ref] = useAudio({
-    src: current?.src,
+    src: `https://localhost:44365/mp3/${data?.musicUrl}`,
     autoPlay: false,
   });
 
   useEffect(() => {
-    controls.play();
-  }, [current]);
+    playing ? controls.play() : controls.pause();
+  }, [playing]);
 
   useEffect(() => {
     dispatch(setPlaying(state.playing));
   }, [state.playing]);
-
-  useEffect(() => {
-    dispatch(setControls(controls));
-  }, []);
 
   const volumeIcon = useMemo(() => {
     if (state.volume == 0 || state.muted) return "volumeMuted";
@@ -46,13 +35,13 @@ export default function Player() {
       {/* footer music */}
       <div className="flex justify-between px-4 items-center h-full">
         <div className="min-w-[11.25rem] w-[30%] ">
-          {current && (
+          {
             <div className="flex items-center">
               <div className="flex items-center  ">
-                {!sidebar && (
+                {data && (
                   <div className="w-14 h-14 relative group mr-4 flex-shrink-0">
                     <img
-                      src={`https://localhost:44365/musicAlbomimg/${music.photoUrl}`}
+                      src={`https://localhost:44365/Images/${data.musicPhotoUrl}`}
                       className="w-full h-full"
                     />
 
@@ -66,18 +55,20 @@ export default function Player() {
                 )}
                 <div>
                   <h6 className="text-white font-semibold line-clamp-1">
-                    {music.title}
+                    {data && data.musicName}
                   </h6>
                   <span className="text-opacity-70 text-[0.688rem]">
-                    {music.artistName}
+                    {data && data.artistName}
                   </span>
                 </div>
               </div>
-              <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
-                <Icon name="heartFilled" />
-              </button>
+              {data && (
+                <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
+                  <Icon name="heartFilled" />
+                </button>
+              )}
             </div>
-          )}
+          }
         </div>
         <div className=" max-w-[45.125rem] w-[40%] flex flex-col px-4 items-center">
           <div className="flex items-center gap-x-2 ">

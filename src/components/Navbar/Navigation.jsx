@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "../Icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -12,6 +12,19 @@ export default function Navigation() {
   const goForward = () => {
     navigate(1);
   };
+
+  const [isAuth, setIsAuth] = useState(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsAuth(
+      location.pathname.includes("signin") ||
+        location.pathname.includes("register")
+    );
+  }, [location.pathname]);
+
+  if (isAuth) return;
 
   return (
     <>

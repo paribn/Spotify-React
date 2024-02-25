@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <div className="grid gap-y-6">
-        <CardItems title="Recently played" more="/blabla" />
+        <CardItems title="Recently played" />
       </div>
     </>
   );

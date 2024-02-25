@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function Title({ title, more = false }) {
+function Title({ title, more = false, onClick }) {
   return (
     <header className="flex items-center justify-between mb-4">
       <NavLink to={more ?? "#"}>
@@ -9,14 +9,12 @@ function Title({ title, more = false }) {
         </h3>
       </NavLink>
 
-      {more && (
-        <NavLink
-          className={"text-sm hover:underline font-semibold text-link "}
-          to={more}
-        >
-          Show all
-        </NavLink>
-      )}
+      <NavLink
+        className={"text-sm hover:underline font-semibold text-link "}
+        onClick={onClick}
+      >
+        {more ? "Show Less" : "Show All"}
+      </NavLink>
     </header>
   );
 }

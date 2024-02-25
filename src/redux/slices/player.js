@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  data: null,
   current: false,
   controls: false,
   playing: false,
@@ -23,10 +24,13 @@ export const playerSlice = createSlice({
     setSidebar: (state, action) => {
       state.sidebar = action.payload;
     },
+    setData: (state, action) => {
+      state.data = action.payload;
+    },
   },
 });
 
-export const { setControls, setCurrent, setPlaying, setSidebar } =
+export const { setControls, setCurrent, setPlaying, setSidebar, setData } =
   playerSlice.actions;
 
 export default playerSlice.reducer;

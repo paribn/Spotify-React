@@ -8,8 +8,7 @@ export default function Menu() {
       <ul className="flex flex-col">
         <li>
           <NavLink
-            activeClassName="text-white font-bold"
-            exact
+            activeclassname="text-white font-bold"
             to={"/"}
             className="h-10  flex gap-x-4 items-center text-sm font-semibold text-link hover:text-white px-4"
           >
@@ -23,8 +22,7 @@ export default function Menu() {
           <NavLink
             to={"/search"}
             className="h-10  flex gap-x-4 items-center text-sm font-semibold text-link hover:text-white px-4"
-            exact
-            activeClassName="text-white font-bold"
+            activeclassname="text-white font-bold"
           >
             <span>
               <Icon name="search" />

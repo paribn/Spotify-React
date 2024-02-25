@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "../Icons";
-import { setSidebar } from "../../stores/player";
+import { setSidebar } from "../../redux/slices/player";
 
 export default function SidebarCover() {
-  const current = useSelector((state) => state.player.current);
+  const data = useSelector((state) => state.player.data);
   const dispatch = useDispatch();
 
   return (
     <div className=" pt-[100%] bg-mainBg relative group">
       <img
-        src={current?.img}
+        src={`https://localhost:44365/Images/${data.musicPhotoUrl}`}
         className=" w-full h-full object-cover absolute top-0 left-0"
         alt=""
       />

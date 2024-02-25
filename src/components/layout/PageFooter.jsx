@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Icon } from "../Icons";
 
 export default function PageFooter() {
+  const [isAuth, setIsAuth] = useState(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsAuth(
+      location.pathname.includes("signin") ||
+        location.pathname.includes("register")
+    );
+  }, [location.pathname]);
+
+  if (isAuth) return;
   return (
     <>
-      <div class="grid grid-cols-4 gap-4 py-8 px-8 mt-8 text-l font-semibold">
+      <div className="grid grid-cols-4 gap-4 py-8 px-8 mt-8 text-l font-semibold">
         <div>
           <ul className="mb-4">
             <li className="text-white  my-2">Company</li>

@@ -61,7 +61,9 @@ export default function CardDetails() {
           <Songs
             number={index + 1}
             name={music.musicName}
+            music={music}
             imgSrc={`https://localhost:44365/Images/${music?.musicPhotoUrl}`}
+            // musicUrl={`https://localhost:44365/mp3${music?.musicUrl}`}
           />
         ))}
       </div>
