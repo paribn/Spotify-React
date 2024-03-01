@@ -6,13 +6,14 @@ export default function CardItems({ title }) {
   const [music, setMusic] = useState([]);
 
   const [isMore, setIsMore] = useState(false);
+
   useEffect(() => {
     if (isMore) {
       fetch(`${process.env.REACT_APP_API}/Artist`)
         .then((x) => x.json())
         .then((x) => setMusic(x));
     } else {
-      fetch(`${process.env.REACT_APP_API}/Artist?page=1&&perPage=5`)
+      fetch(`${process.env.REACT_APP_API}/Artist?page=1&&perPage=10`)
         .then((x) => x.json())
         .then((x) => setMusic(x));
     }
@@ -29,7 +30,7 @@ export default function CardItems({ title }) {
           }}
         />
 
-        <div className="grid grid-cols-5 p-4 gap-x-6 overflow-auto">
+        <div className="grid grid-cols-5 p-4 gap-x-6 gap-y-7 overflow-auto">
           {music.map((x) => {
             return (
               <SongItem

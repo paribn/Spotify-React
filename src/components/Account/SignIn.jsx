@@ -1,11 +1,38 @@
 import { useFormik } from "formik";
 import React from "react";
+import logo from "../../assets/img/logo.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loginSchema } from "../../validations/loginSchema";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { httpClient } from "../../utils/httpClient";
 import { loginAction } from "../../redux/slices/accoutSlice";
+import { ToastContainer, toast } from "react-toastify";
+
+const notify = () => {
+  toast.success(" Welcome! Login was made successfully.", {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+};
+const notifyError = () => {
+  toast.error("Failed to log in", {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+};
 
 export default function SignIn() {
   const { token } = useSelector((state) => state.account);
@@ -65,30 +92,39 @@ export default function SignIn() {
 
       console.log(response);
 
-      localStorage.setItem(
-        "myData",
-        JSON.stringify({
-          token: response.data.token,
-          email: response.data.email,
-        })
-      );
-      dispatch(
-        loginAction({
-          token: response.data.token,
-          email: response.data.email,
-        })
-      );
+      if (response.data && response.data.token && response.data.email) {
+        localStorage.setItem(
+          "myData",
+          JSON.stringify({
+            token: response.data.token,
+            email: response.data.email,
+          })
+        );
+        dispatch(
+          loginAction({
+            token: response.data.token,
+            email: response.data.email,
+          })
+        );
 
-      console.log("success");
-      navigate("/");
+        console.log("success");
+        navigate("/");
+        notify();
+      } else {
+        notifyError();
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
+      notifyError();
     }
   };
 
   return (
     <>
-      <div className=" w-full h-full bg-footer p-10 rounded-xl mt-14">
+      <div>
+        <img src={logo} alt="spotify" className="h-6 mb-4 ml-6" />
+      </div>
+      <div className=" w-full h-full  p-10 rounded-xl mt-14">
         <form
           className="max-w-xs mx-auto "
           onSubmit={(e) => onSubmit(e, formik.values)}
@@ -144,7 +180,9 @@ export default function SignIn() {
             </label>
           </div> */}
           <button
-            onClick={(e) => onSubmit(e, formik.values)}
+            onClick={(e) => {
+              onSubmit(e, formik.values);
+            }}
             type="submit"
             className="w-full h-10 rounded-3xl bg-greenPlay text-black font-semibold"
           >

@@ -3,13 +3,13 @@ import Navbar from "./layout/Navbar";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Library from "./pages/Library";
 import NotFound from "./pages/NotFound";
 import Register from "./Account/Register";
 import SignIn from "./Account/SignIn";
 import CardDetails from "./pages/CardDetails";
 import PageFooter from "./layout/PageFooter";
 import ForgotPassword from "./Account/ForgotPassword";
+import CategoryDetails from "./pages/CategoryDetails";
 
 export default function Main() {
   return (
@@ -20,7 +20,10 @@ export default function Main() {
           <Routes>
             <Route index path="/" element={<Home />}></Route>
             <Route path="/search" element={<Search />}></Route>
-            <Route path="/library" element={<Library />}></Route>
+            <Route
+              path="/categoryDetails/:id"
+              element={<CategoryDetails />}
+            ></Route>
             <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/Register" element={<Register />}></Route>
             <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>

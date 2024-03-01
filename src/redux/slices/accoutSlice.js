@@ -21,6 +21,7 @@ export const accountSlice = createSlice({
       state.name = name;
     },
     logoutAction: (state) => {
+      localStorage.removeItem("myData");
       return initialState;
     },
   },

@@ -20,6 +20,7 @@ module.exports = {
         nav: "#090909",
         icon: "#292929",
         iconHover: "#7d7b7b",
+        bg: "#4a4a4a",
       },
     },
   },

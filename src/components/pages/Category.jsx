@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../Title";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Category({ id, name, color, photoPath }) {
+  const [genre, setGenre] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API}/Genre/${id}`)
+      .then((x) => x.json())
+      .then((x) => setGenre(x));
+  }, []);
+
   return (
     <>
-      <NavLink key={id} to="/">
+      <NavLink key={id} to={`/categoryDetails/${id}`}>
         <div
           style={{ backgroundColor: color }}
           className="rounded-md before:pt-[100%] before:block relative"

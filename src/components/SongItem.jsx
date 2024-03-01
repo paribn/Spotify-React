@@ -53,9 +53,10 @@ export default function SongItem({ id, photoPath, name, artistType }) {
         />
         <button
           onClick={(e) => updateCurrent(e)}
-          className={`w-12 h-12 rounded-full bg-greenPlay absolute bottom-1 right-1 group-hover:flex group-focus:flex ease-out duration-300 items-center justify-center ${
-            !isCurrentItem ? "hidden" : "flex"
-          }`}
+          className={`w-12 h-12 rounded-full bg-greenPlay absolute bottom-1 
+          right-1 
+          group-hover:flex group-focus:flex ease-out duration-300 items-center
+           justify-center ${!isCurrentItem ? "hidden" : "flex"}`}
         >
           <Icon name={isCurrentItem && playing ? "pause" : "play"} />
         </button>
