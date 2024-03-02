@@ -82,34 +82,6 @@ export default function Sidebar() {
               </div>
             </div>
           </div>
-
-          {/* <nav className="">
-            <ul>
-              <li onClick={() => onCreate()}>
-                <a
-                  href="#"
-                  className="flex hover:bg-hoverColor w-60 py-4 gap-6 ml-4  text-white items-center  text-sm font-semibold text-link "
-                >
-                  <span className="ml-3 ">
-                    <Icon name="plus" />
-                  </span>
-                  Create Playlist
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex hover:bg-hoverColor py-2 gap-3 ml-4 p-2 text-white items-center text-sm font-semibold text-link "
-                >
-                  <span>
-                    <Icon name="heart" />
-                  </span>
-                  Liked Songs
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <Playlist /> */}
         </div>
         {sidebar && <SidebarCover />}
       </aside>
@@ -142,22 +114,6 @@ export default function Sidebar() {
               </span>
               Your Library
             </NavLink>
-
-            {/* <div className="px-2">
-              <div className="bg-search h-32 gap-x-4 px-4 p-2 rounded-xl text-black mt-5">
-                <p className="text-white font-semibold">
-                  Create your first playlist
-                </p>
-                <span className="text-white text-sm font-semibold">
-                  It's easy we'll help you
-                </span>
-                <div className=" bg-white w-32 mt-4 h-8 text-center px-2 rounded-2xl font-semibold">
-                  <NavLink to={"/signin"}>
-                    <button>Create playlist</button>
-                  </NavLink>
-                </div>
-              </div>
-            </div> */}
 
             <nav className="">
               <ul>
