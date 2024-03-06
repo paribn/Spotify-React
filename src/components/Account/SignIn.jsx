@@ -122,7 +122,7 @@ export default function SignIn() {
   return (
     <>
       <div>
-        <img src={logo} alt="spotify" className="h-6 mb-4 ml-6" />
+        <img src={logo} alt="spotify" className=" h-[2rem] mb-4 ml-6 w-40" />
       </div>
       <div className=" w-full h-full  p-10 rounded-xl mt-14">
         <form

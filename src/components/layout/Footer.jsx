@@ -10,7 +10,9 @@ export default function Footer() {
   useEffect(() => {
     setIsAuth(
       location.pathname.includes("signin") ||
-        location.pathname.includes("register")
+        location.pathname.includes("register") ||
+        location.pathname.includes("ForgotPassword") ||
+        location.pathname.includes("resetpassword")
     );
   }, [location.pathname]);
 

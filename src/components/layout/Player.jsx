@@ -4,7 +4,13 @@ import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setControls, setPlaying, setSidebar } from "../../redux/slices/player";
+import {
+  setControls,
+  setPlaying,
+  setSidebar,
+  setNextSong,
+  setPreviousSong,
+} from "../../redux/slices/player";
 
 export default function Player() {
   const dispatch = useDispatch();
@@ -75,7 +81,10 @@ export default function Player() {
             <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 ">
               <Icon name="shuffle" />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100">
+            <button
+              onClick={() => dispatch(setPreviousSong())}
+              className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100"
+            >
               <Icon name="playerPrev" />
             </button>
             <button
@@ -84,7 +93,10 @@ export default function Player() {
             >
               <Icon name={state?.playing ? "pause" : "play"} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 ">
+            <button
+              onClick={() => console.log(dispatch(setNextSong()))}
+              className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 "
+            >
               <Icon name="playerNext" />
             </button>
             <button className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100">

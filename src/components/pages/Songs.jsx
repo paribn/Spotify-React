@@ -10,7 +10,6 @@ import player, {
 } from "../../redux/slices/player";
 import CustomRange from "../layout/Range";
 import { ToastContainer, toast } from "react-toastify";
-import { useAudio } from "react-use";
 
 const notify = () => {
   toast("🦄 Added to Liked Songs.", {
@@ -41,6 +40,7 @@ const removeMusic = () => {
 export default function Songs({ number, music, name, artist, imgSrc, state }) {
   const dispacth = useDispatch();
 
+  console.log(music, "musics");
   const { current, playing, controls, data } = useSelector(
     (state) => state.player
   );
@@ -51,6 +51,7 @@ export default function Songs({ number, music, name, artist, imgSrc, state }) {
   useEffect(() => {
     if (likedSongs) {
       setIsLiked(!!likedSongs?.getMusic?.find((song) => song.id === music.id));
+      console.log(music.albumName);
     }
 
     console.log(isLiked, "isLiked");
@@ -137,7 +138,6 @@ export default function Songs({ number, music, name, artist, imgSrc, state }) {
       <div className="text-[0.875rem] font-semibold text-white flex items-center justify-between ml-auto md:ml-0 text-opacity-60">
         {secondsToTime(music?.duration)}
       </div> */}
-      <div></div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function Category({ id, name, color, photoPath }) {
       <NavLink key={id} to={`/categoryDetails/${id}`}>
         <div
           style={{ backgroundColor: color }}
-          className="rounded-md before:pt-[100%] before:block relative"
+          className="rounded-md before:pt-[100%] before:block relative px-8"
         >
           <div className="absolute inset-0 overflow-hidden text-wrap">
             <h3 className="p-4 text-2xl text-white font-semibold">{name}</h3>

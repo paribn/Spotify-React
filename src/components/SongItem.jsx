@@ -42,7 +42,7 @@ export default function SongItem({ id, photoPath, name, artistType }) {
 
   return (
     <div
-      className=" bg-hoverColor p-4 rounded hover:bg-dropDown group"
+      className=" bg-hoverColor p-4 rounded hover:bg-dropDown group "
       key={id}
       onClick={() => navigate(`/cardDetails/${id}?isPlaylist=0`)}
     >

@@ -11,20 +11,36 @@ export default function Search({ title, more = false, id }) {
   const { data } = useSelector((state) => state.filters);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
+  const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(true);
   const params = {
     page,
     perPage,
   };
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API}/Genre`)
-      .then((x) => x.json())
-      .then((x) => setGenre(x));
-  }, []);
   const [hover, setHover] = useState(false);
 
-  console.log(genre);
+  useEffect(() => {
+    setTimeout(() => {
+      fetch(`${process.env.REACT_APP_API}/Genre`)
+        .then((x) => {
+          if (!x.ok) {
+            throw Error("Could not fetch the data for that resourse");
+          }
+          return x.json();
+        })
+        .then((x) => {
+          setGenre(x);
+          setLoading(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(err.message);
+        });
+    }, 1000);
+  }, []);
+
   const colors = [
     "#e91429",
     "#dc148c",
@@ -39,8 +55,43 @@ export default function Search({ title, more = false, id }) {
     "#e1118c",
   ];
   return (
-    <section>
+    <section className="px-8">
       <Title title="Browse all" />
+
+      {isLoading && (
+        <div
+          id="loading-overlay"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-mainBg bg-opacity-60"
+        >
+          <svg
+            class="animate-spin h-8 w-8 text-white mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+
+          <span class="text-white text-3xl font-bold">Loading...</span>
+        </div>
+      )}
+
+      {error && data.length <= 0 && (
+        <div className="text-white text-xl">{error}</div>
+      )}
+
       {data.length <= 0 && (
         <div className="grid grid-cols-5 gap-6">
           {genre.map((x, index) => {

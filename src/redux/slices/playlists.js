@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
+  userId: null,
 };
 
 export const playlistSlice = createSlice({
@@ -11,9 +12,12 @@ export const playlistSlice = createSlice({
     setData: (state, action) => {
       state.data = action.payload;
     },
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+    },
   },
 });
 
-export const { setData } = playlistSlice.actions;
+export const { setData, setUserId } = playlistSlice.actions;
 
 export default playlistSlice.reducer;
