@@ -36,7 +36,7 @@ export default function Auth() {
   }, [location.pathname]);
 
   if (isAuth) return;
-  if (!data?.token)
+  if (!data?.token) {
     return (
       <>
         <div className="flex">
@@ -57,8 +57,7 @@ export default function Auth() {
         </div>
       </>
     );
-
-  if (data.token)
+  } else {
     return (
       <>
         <div className="flex gap-4">
@@ -76,4 +75,5 @@ export default function Auth() {
         </div>
       </>
     );
+  }
 }

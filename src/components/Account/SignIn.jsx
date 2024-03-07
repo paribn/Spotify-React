@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/img/logo.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loginSchema } from "../../validations/loginSchema";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { httpClient } from "../../utils/httpClient";
 import { loginAction } from "../../redux/slices/accoutSlice";
 import { ToastContainer, toast } from "react-toastify";
+import { Icon } from "../Icons";
 
 const notify = () => {
   toast.success(" Welcome! Login was made successfully.", {
@@ -118,6 +119,10 @@ export default function SignIn() {
       notifyError();
     }
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <>
@@ -156,21 +161,32 @@ export default function SignIn() {
             >
               Password
             </label>
-            <input
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              type="password"
-              id="password"
-              name="Password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-              required
-              value={formik.values.Password}
-            />
-            {formik.errors.Password && formik.touched.Password && (
-              <span style={{ color: "#f15e6c" }}>{formik.errors.Password}</span>
-            )}
+            <div className="relative">
+              <input
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="Password"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                required
+                value={formik.values.Password}
+              />
+              {formik.errors.Password && formik.touched.Password && (
+                <span style={{ color: "#f15e6c" }}>
+                  {formik.errors.Password}
+                </span>
+              )}
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 focus:outline-none"
+              >
+                {showPassword ? <Icon name="closeEye" /> : <Icon name="eye" />}
+              </button>
+            </div>
           </div>
-          {/* <div className="flex items-start mb-5">
+          <div className="flex items-start mb-5">
             <label className="inline-flex items-center mb-5 cursor-pointer">
               <input type="checkbox" value="" className="sr-only peer" />
               <div className="relative w-9 h-5  peer-focus:outline-none peer-focus: ring-2 bg-greenPlay peer-focus:ring-white dark:peer-focus:ring-white-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-white-600"></div>
@@ -178,7 +194,7 @@ export default function SignIn() {
                 Remember me
               </span>
             </label>
-          </div> */}
+          </div>
           <button
             onClick={(e) => {
               onSubmit(e, formik.values);

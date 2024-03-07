@@ -13,12 +13,16 @@ function Search() {
     }
     e.preventDefault();
     const result = await fetch(
-      `https://localhost:44365/api/Search?input=${searchValue}`
+      `https://localhost:44365/api/Search?searchTerm=${searchValue}`
     );
     const data = await result.json();
 
     dispatch(setData(data));
   };
+
+  console.log(searchValue, "sear");
+
+  // Search?artistName=lana&musicName=cinnamon%20girl&albumName=Ultraviolence%20%28Deluxe%29
   return (
     <>
       <div className="mr-auto ml-4 relative">

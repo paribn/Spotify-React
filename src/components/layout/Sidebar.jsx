@@ -17,6 +17,7 @@ export default function Sidebar() {
   const isLoggedIn = useSelector((state) => state.account.token !== null);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
+  const { email } = useSelector((state) => state.account);
   const [input, setInput] = useSetState(null);
 
   const onCreate = () => {

@@ -4,6 +4,7 @@ import logo from "../../assets/img/logo.svg";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Icon } from "../Icons";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -76,6 +77,10 @@ export default function ResetPassword() {
         });
     }
   }
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <>
@@ -102,7 +107,7 @@ export default function ResetPassword() {
             <input
               value={Password}
               onChange={(e) => setPassword(e.target.value)}
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               className="bg-gray-50 border border-textColor text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
@@ -116,14 +121,23 @@ export default function ResetPassword() {
             >
               Confirm the new password
             </label>
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50 border border-textColor text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-              value={confirmpassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className="bg-gray-50 border border-textColor text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-mainBg dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                value={confirmpassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 focus:outline-none"
+              >
+                {showPassword ? <Icon name="closeEye" /> : <Icon name="eye" />}
+              </button>
+            </div>
           </div>
           <button
             type="submit"

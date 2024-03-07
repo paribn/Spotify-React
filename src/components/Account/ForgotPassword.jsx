@@ -14,7 +14,7 @@ export default function ForgotPassword() {
     email: Email,
   };
   const notifyError = () => {
-    toast.error("Failed to log in", {
+    toast.error("Something went wrong", {
       position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -27,7 +27,7 @@ export default function ForgotPassword() {
   };
 
   const notify = () => {
-    toast.success(" Welcome! Login was made successfully.", {
+    toast.success(" Please,check your email", {
       position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,

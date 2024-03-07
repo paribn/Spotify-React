@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Icon } from "../Icons";
-import { setData, setPlaying } from "../../redux/slices/player";
+import { setCurrent, setData, setPlaying } from "../../redux/slices/player";
 
 export default function CategoryDetails({ id }) {
   const [genre, setGenre] = useState(null);
@@ -127,7 +127,7 @@ export default function CategoryDetails({ id }) {
                   ${!isCurrentItem ? "hidden" : "flex"}`}
                   onClick={() => {
                     dispacth(setData(music));
-                    dispacth(setPlaying(true));
+                    dispacth(setPlaying(false));
                   }}
                 >
                   <Icon name={isCurrentItem && playing ? "pause" : "play"} />

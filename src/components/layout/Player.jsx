@@ -14,12 +14,14 @@ import {
 
 export default function Player() {
   const dispatch = useDispatch();
-  const { playing, data } = useSelector((state) => state.player);
+  const { playing, data, songList } = useSelector((state) => state.player);
 
+  console.log(data, "playing");
   const [audio, state, controls, ref] = useAudio({
     src: `https://localhost:44365/mp3/${data?.musicUrl}`,
     autoPlay: false,
   });
+  // console.log(state.duration, "controls");
 
   useEffect(() => {
     playing ? controls.play() : controls.pause();
@@ -94,7 +96,14 @@ export default function Player() {
               <Icon name={state?.playing ? "pause" : "play"} />
             </button>
             <button
-              onClick={() => console.log(dispatch(setNextSong()))}
+              onClick={() => {
+                const currentIndex = state?.songList.findIndex(
+                  (song) => song.id === state?.current.id
+                );
+                const nextIndex = (currentIndex + 1) % state?.songList.length;
+                const nextSong = state?.songList[nextIndex];
+                dispatch(setNextSong(nextSong));
+              }}
               className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 "
             >
               <Icon name="playerNext" />
