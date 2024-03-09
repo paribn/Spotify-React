@@ -51,6 +51,7 @@ export default function CardItems({ title }) {
             setIsMore((prev) => !prev);
           }}
         />
+
         {isLoading && (
           <div
             id="loading-overlay"

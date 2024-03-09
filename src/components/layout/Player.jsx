@@ -1,8 +1,8 @@
 import { Icon } from "../Icons";
-import { useAudio } from "react-use";
+import { useAudio, useFullscreen, useToggle } from "react-use";
 import { secondsToTime } from "./Utilis";
 import CustomRange from "./Range";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setControls,
@@ -11,17 +11,24 @@ import {
   setNextSong,
   setPreviousSong,
 } from "../../redux/slices/player";
+import FullScreenPlayer from "../FullScreenPlayer";
 
 export default function Player() {
+  const fsRef = useRef();
+  const [show, toggle] = useToggle(false);
+  const isFullscreen = useFullscreen(fsRef, show, {
+    onClose: () => toggle(false),
+  });
+
   const dispatch = useDispatch();
   const { playing, data, songList } = useSelector((state) => state.player);
 
+  console.log(data);
   console.log(data, "playing");
   const [audio, state, controls, ref] = useAudio({
     src: `https://localhost:44365/mp3/${data?.musicUrl}`,
     autoPlay: false,
   });
-  // console.log(state.duration, "controls");
 
   useEffect(() => {
     playing ? controls.play() : controls.pause();
@@ -49,7 +56,7 @@ export default function Player() {
                 {data && (
                   <div className="w-14 h-14 relative group mr-4 flex-shrink-0">
                     <img
-                      src={`https://localhost:44365/Images/${data.musicPhotoUrl}`}
+                      src={`https://localhost:44365/Images/${data?.musicPhotoUrl}`}
                       className="w-full h-full"
                     />
 
@@ -63,24 +70,24 @@ export default function Player() {
                 )}
                 <div>
                   <h6 className="text-white font-semibold line-clamp-1">
-                    {data && data.musicName}
+                    {data && data?.musicName}
                   </h6>
                   <span className="text-opacity-70 text-[0.688rem]">
-                    {data && data.artistName}
+                    {data && data?.artistName}
                   </span>
                 </div>
               </div>
-              {data && (
+              {/* {data && (
                 <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
                   <Icon name="heartFilled" />
                 </button>
-              )}
+              )} */}
             </div>
           }
         </div>
         <div className=" max-w-[45.125rem] w-[40%] flex flex-col px-4 items-center">
           <div className="flex items-center gap-x-2 ">
-            <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 ">
+            {/* <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 ">
               <Icon name="shuffle" />
             </button>
             <button
@@ -88,14 +95,14 @@ export default function Player() {
               className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100"
             >
               <Icon name="playerPrev" />
-            </button>
+            </button> */}
             <button
               onClick={controls[state?.playing ? "pause" : "play"]}
               className="w-8 h-8 flex bg-white rounded-full hover:scale-[1.06] items-center justify-center  text-white text-opacity-70 hover:text-opacity-100"
             >
               <Icon name={state?.playing ? "pause" : "play"} />
             </button>
-            <button
+            {/* <button
               onClick={() => {
                 const currentIndex = state?.songList.findIndex(
                   (song) => song.id === state?.current.id
@@ -107,10 +114,10 @@ export default function Player() {
               className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100 "
             >
               <Icon name="playerNext" />
-            </button>
-            <button className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100">
+            </button> */}
+            {/* <button className="w-8 h-8 flex items-center justify-center  text-white text-opacity-70 hover:text-opacity-100">
               <Icon name="repeat" />
-            </button>
+            </button> */}
           </div>
           <div className="w-full flex items-center mt-1.5 gap-x-2">
             {audio}
@@ -130,15 +137,6 @@ export default function Player() {
           </div>
         </div>
         <div className="min-w-[11.25rem] w-[30%] flex justify-end">
-          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
-            <Icon name="lyrics" />
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
-            <Icon name="queue" />
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
-            <Icon name="device" />
-          </button>
           <button
             onClick={controls[state.muted ? "unmute " : "mute"]}
             className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100"
@@ -158,12 +156,23 @@ export default function Player() {
             />
           </div>
 
-          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
+          <button
+            onClick={() => toggle()}
+            className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100"
+          >
             <Icon name="fullScreen" />
           </button>
-          <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
-            <Icon name="pictureInPicture" />
-          </button>
+        </div>
+
+        <div ref={fsRef}>
+          {isFullscreen && (
+            <FullScreenPlayer
+              toggle={toggle}
+              state={state}
+              controls={controls}
+              volumeIcon={volumeIcon}
+            />
+          )}
         </div>
       </div>
     </>

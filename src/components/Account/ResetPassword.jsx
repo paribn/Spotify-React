@@ -26,7 +26,7 @@ export default function ResetPassword() {
   };
 
   const notify = () => {
-    toast.success(" Welcome! Login was made successfully.", {
+    toast.success("Reset password was made successfully.", {
       position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,

@@ -22,10 +22,9 @@ function Search() {
 
   console.log(searchValue, "sear");
 
-  // Search?artistName=lana&musicName=cinnamon%20girl&albumName=Ultraviolence%20%28Deluxe%29
   return (
     <>
-      <div className="mr-auto ml-4 relative">
+      {/* <div className="mr-auto ml-4 relative">
         <form onSubmit={(e) => handleFilter(e)}>
           <label
             htmlFor="search-input"
@@ -43,7 +42,7 @@ function Search() {
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </form>
-      </div>
+      </div> */}
     </>
   );
 }

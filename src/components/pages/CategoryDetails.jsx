@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { Icon } from "../Icons";
-import { setCurrent, setData, setPlaying } from "../../redux/slices/player";
+import { setData, setPlaying } from "../../redux/slices/player";
 
 export default function CategoryDetails({ id }) {
   const [genre, setGenre] = useState(null);
@@ -17,6 +17,7 @@ export default function CategoryDetails({ id }) {
     (state) => state.player
   );
 
+  console.log(genre, "genree");
   const [isCurrentItem, setIsCurrentItem] = useState(null);
 
   useEffect(() => {
@@ -115,11 +116,10 @@ export default function CategoryDetails({ id }) {
             <div
               className=" bg-hoverColor p-4 rounded hover:bg-dropDown group"
               key={music.id}
-              onClick={() => navigate(`/cardDetails/${music.id}?isPlaylist=0`)}
             >
               <div className="pt-[100%] relative mb-4">
                 <img
-                  src={`https://localhost:44365/Images/${music?.photoUrl}`}
+                  src={`https://localhost:44365/Images/${music?.musicPhotoUrl}`}
                   className={`absolute inset-0 w-full h-full`}
                 />
                 <button
@@ -127,24 +127,16 @@ export default function CategoryDetails({ id }) {
                   ${!isCurrentItem ? "hidden" : "flex"}`}
                   onClick={() => {
                     dispacth(setData(music));
-                    dispacth(setPlaying(false));
+                    dispacth(setPlaying(true));
                   }}
                 >
                   <Icon name={isCurrentItem && playing ? "pause" : "play"} />
                 </button>
               </div>
               <h6 className="overflow-hidden overflow-ellipsis whitespace-nowrap font-semibold text-white">
-                {music.name}
+                {music.musicName}
               </h6>
-              <div
-                key={music?.artistId}
-                onClick={() =>
-                  navigate(`/cardDetails/${music?.artistId}?isPlaylist=0`)
-                }
-                className="hover:underline"
-              >
-                {music?.artistname}
-              </div>
+              <div className="hover:underline">{music?.artistName}</div>
             </div>
           ))}
         </div>

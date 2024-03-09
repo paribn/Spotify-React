@@ -12,6 +12,7 @@ import ForgotPassword from "./Account/ForgotPassword";
 import CategoryDetails from "./pages/CategoryDetails";
 import LikedSongPage from "./layout/LikedSongPage";
 import ResetPassword from "./Account/ResetPassword";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
 export default function Main() {
   return (
@@ -27,7 +28,16 @@ export default function Main() {
           ></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/Register" element={<Register />}></Route>
-          <Route path="/likedSongs" element={<LikedSongPage />}></Route>
+
+          <Route
+            path="/likedSongs"
+            element={
+              <ProtectedRoute>
+                <LikedSongPage />
+              </ProtectedRoute>
+            }
+          ></Route>
+
           <Route path="/resetpassword" element={<ResetPassword />}></Route>
           <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
           <Route path="/cardDetails/:id" element={<CardDetails />}></Route>

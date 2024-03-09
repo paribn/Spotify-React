@@ -16,10 +16,10 @@ export default function SongItem({ id, photoPath, name, artistType }) {
     setIsCurrentItem(data && data.artistId === id && current);
   }, [data, current]);
 
-  const cardStyle =
-    artistType && typeof artistType === "string" && artistType.includes("Band")
-      ? "rounded-lg"
-      : "rounded-full";
+  // const cardStyle =
+  //   artistType && typeof artistType === "string" && artistType.includes("Band")
+  //     ? "rounded-lg"
+  //     : "rounded-full";
 
   const updateCurrent = async (e) => {
     if (!current) {
@@ -49,7 +49,7 @@ export default function SongItem({ id, photoPath, name, artistType }) {
       <div className="pt-[100%] relative mb-4">
         <img
           src={`https://localhost:44365/Images/${photoPath}`}
-          className={`absolute inset-0 w-full h-full ${cardStyle} `}
+          className={`absolute inset-0 w-full h-full rounded-full `}
         />
         <button
           onClick={(e) => updateCurrent(e)}

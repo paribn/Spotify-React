@@ -36,7 +36,25 @@ export default function Auth() {
   }, [location.pathname]);
 
   if (isAuth) return;
-  if (!data?.token) {
+  if (data?.token) {
+    return (
+      <>
+        <div className="flex gap-4">
+          <div className="text-white items-center justify-center flex ">
+            {email}
+          </div>
+          <div>
+            <button
+              onClick={() => dispatch(logoutAction())}
+              className=" text-black  hover:scale-110 duration-150 font-semibold bg-white w-28 h-12 rounded-full"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  } else {
     return (
       <>
         <div className="flex">
@@ -53,24 +71,6 @@ export default function Auth() {
                 </button>
               </NavLink>
             </div>
-          </div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className="flex gap-4">
-          <div className="text-white items-center justify-center flex ">
-            {email}
-          </div>
-          <div>
-            <button
-              onClick={() => dispatch(logoutAction())}
-              className=" text-black  hover:scale-110 duration-150 font-semibold bg-white w-28 h-12 rounded-full"
-            >
-              Log out
-            </button>
           </div>
         </div>
       </>

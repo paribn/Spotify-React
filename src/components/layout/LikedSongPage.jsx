@@ -69,16 +69,15 @@ export default function LikedSongPage() {
                 # <span className="ml-6">Title</span>
               </span>
               <span>Album</span>
-              <span className="mr-16">
-                <Icon name="duration" />
-              </span>
+              <span className="mr-16"></span>
             </div>
           </div>
           {likedSongs.map((song, index) => (
             <div
               key={song.id}
               className="grid grid-cols-6 w-[67.375rem] text-neutral-400 text-sm py-2 mt-4 px-2 hover:bg-white hover:bg-opacity-10 rounded-lg cursor-default"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 dispacth(setData(song));
                 dispacth(setPlaying(true));
               }}
@@ -87,9 +86,8 @@ export default function LikedSongPage() {
                 <span>{index + 1}</span>
                 <p className="w-20 h-10">
                   <img
-                    src={`https://localhost:44365/Images/${song.musicPhotoUrl}`}
+                    src={`https://localhost:44365/Images/${song?.musicPhotoUrl}`}
                     alt="photo"
-                    className="h-10 w-full"
                   />
                 </p>
 
@@ -127,7 +125,7 @@ export default function LikedSongPage() {
                     <Icon name="greenHeart" />
                   </button>
                 </span>
-                <span>duration</span>
+                <span></span>
               </div>
             </div>
           ))}
